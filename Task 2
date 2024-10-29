@@ -1,0 +1,140 @@
+HTML 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Styles.css">
+    <title>Stylized Stopwatch</title>
+</head>
+<body>
+    <div class="stopwatch-container">
+        <div class="half-circle"></div>
+        <div class="time-display">00:00:00</div>
+        <div class="controls">
+            <button id="start" class="control-button">Start</button>
+            <button id="pause" class="control-button">Pause</button>
+            <button id="reset" class="control-button">Reset</button>
+            <button id="lap" class="control-button">Lap</button>
+        </div>
+        <ul class="lap-list"></ul>
+    </div>
+    <script src="Java.js"></script>
+</body>
+</html>
+
+CSS
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e0f7fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.stopwatch-container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+}
+
+.half-circle {
+    width: 220px;
+    height: 110px;
+    background: linear-gradient(to right, #ff5722, #ffccbc);
+    border-radius: 110px 110px 0 0;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.time-display {
+    font-size: 2.5em;
+    margin: 20px 0;
+    color: #333;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.control-button {
+    padding: 10px 15px;
+    font-size: 1em;
+    color: #ffffff;
+    background-color: #3f51b5;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.control-button:hover {
+    background-color: #303f9f;
+}
+
+.lap-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.lap-item {
+    background-color: #f0f0f0;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+JAVA
+
+let timerInterval;
+let seconds = 0;
+const lapList = document.querySelector('.lap-list');
+
+const timeDisplay = document.querySelector('.time-display');
+const startButton = document.getElementById('start');
+const pauseButton = document.getElementById('pause');
+const resetButton = document.getElementById('reset');
+const lapButton = document.getElementById('lap');
+
+function updateDisplay() {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    timeDisplay.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+
+startButton.addEventListener('click', () => {
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        seconds++;
+        updateDisplay();
+    }, 1000);
+});
+
+pauseButton.addEventListener('click', () => {
+    clearInterval(timerInterval);
+});
+
+resetButton.addEventListener('click', () => {
+    clearInterval(timerInterval);
+    seconds = 0;
+    updateDisplay();
+    lapList.innerHTML = ''; // Clear lap times
+});
+
+lapButton.addEventListener('click', () => {
+    const lapTime = document.createElement('li');
+    lapTime.classList.add('lap-item');
+    lapTime.textContent = timeDisplay.textContent; // Display current time as lap
+    lapList.appendChild(lapTime);
+});
