@@ -1,0 +1,189 @@
+HTML
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style.css">
+    <title>Tic Tac Toe</title>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Tic Tac Toe</h1>
+        <div class="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+        <button id="reset" class="control-button">Reset</button>
+        <div class="status"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+CSS
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f6f7;
+    font-family: 'Arial', sans-serif;
+}
+
+.game-container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #3f51b5;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.cell {
+    width: 100%;
+    padding: 20px;
+    background-color: #e3f2fd;
+    border: 2px solid #90caf9;
+    border-radius: 10px;
+    font-size: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.cell:hover {
+    background-color: #bbdefb;
+    transform: scale(1.05);
+}
+
+.control-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    color: #ffffff;
+    background-color: #3f51b5;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.control-button:hover {
+    background-color: #303f9f;
+    transform: scale(1.05);
+}
+
+.status {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #333;
+}
+JAVA SCRIPT
+
+const cells = document.querySelectorAll('.cell');
+const statusDisplay = document.querySelector('.status');
+const resetButton = document.getElementById('reset');
+let currentPlayer = 'X';
+let gameActive = true;
+let gameState = Array(9).fill('');
+
+const winningConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+];
+
+function handleCellClick(event) {
+    const clickedCell = event.target;
+    const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));
+
+    if (gameState[clickedCellIndex] !== '' || !gameActive) {
+        return;
+    }
+
+    gameState[clickedCellIndex] = currentPlayer;
+    clickedCell.textContent = currentPlayer;
+    checkForWinner();
+}
+
+function checkForWinner() {
+    let roundWon = false;
+
+    for (const condition of winningConditions) {
+        const [a, b, c] = condition;
+        if (gameState[a] === '' || gameState[b] === '' || gameState[c] === '') {
+            continue;
+        }
+        if (gameState[a] === gameState[b] && gameState[b] === gameState[c]) {
+            roundWon = true;
+            break;
+        }
+    }
+
+    if (roundWon) {
+        statusDisplay.textContent = `Player ${currentPlayer} Wins!`;
+        gameActive = false;
+        return;
+    }
+
+    if (!gameState.includes('')) {
+        statusDisplay.textContent = 'Draw!';
+        gameActive = false;
+        return;
+    }
+
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    statusDisplay.textContent = `Player ${currentPlayer}'s Turn`;
+}
+
+function resetGame() {
+    gameActive = true;
+    currentPlayer = 'X';
+    gameState.fill('');
+    statusDisplay.textContent = `Player ${currentPlayer}'s Turn`;
+    cells.forEach(cell => {
+        cell.textContent = '';
+    });
+}
+
+cells.forEach(cell => {
+    cell.addEventListener('click', handleCellClick);
+});
+
+resetButton.addEventListener('click', resetGame);
+statusDisplay.textContent = `Player ${currentPlayer}'s Turn`;
+
+SETTINGG JOIN
+
+{
+    "liveServer.settings.port": 5501
+}
