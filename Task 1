@@ -1,0 +1,122 @@
+HTML   
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Navigation Menu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <nav id="navbar">
+        <div class="logo"><img src="logo.png" alt="ProDigy Infotech Logo"></div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="home"><h1>Home Section</h1></section>
+<section id="services"><h1>Services Section</h1></section>
+<section id="about"><h1>About Section</h1></section>
+<section id="contact"><h1>Contact Section</h1></section>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+CSS
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #a3c2e6, #2a4d69);
+    color: white;
+    text-align: center;
+    padding: 50px;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 400px;
+    margin: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.cta-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff5722;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #e64a19;
+}
+
+.loading {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+.weather-info {
+    margin-top: 20px;
+}
+
+#weather-icon {
+    width: 100px;
+    height: auto;
+}
+
+h2 {
+    margin: 10px 0;
+}
+
+p {
+    margin: 5px 0;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+JAVA SCRIPT
+document.getElementById('get-weather').addEventListener('click', function() {
+    const location = document.getElementById('location)
+
+SETTINGS.JSON
+
+{
+    "liveServer.settings.port": 5503
+}
