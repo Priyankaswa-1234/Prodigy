@@ -1,0 +1,232 @@
+HTML
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Your Name | Portfolio</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <h1>Welcome to My Portfolio</h1>
+            <h2>I am a Web Developer</h2>
+            <p>Creating beautiful and functional websites.</p>
+            <a href="#projects" class="cta-button">View My Work</a>
+        </div>
+    </header>
+    
+    <section id="skills" class="section">
+        <h2>Skills</h2>
+        <div class="skills-list">
+            <div class="skill">HTML</div>
+            <div class="skill">CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">React</div>
+            <div class="skill">Node.js</div>
+        </div>
+    </section>
+    
+    <section id="projects" class="section">
+        <h2>Projects</h2>
+        <div class="projects-container">
+            <div class="project">
+                <h3>Project Title 1</h3>
+                <p>Description of the project. What technologies were used? What was the outcome?</p>
+            </div>
+            <div class="project">
+                <h3>Project Title 2</h3>
+                <p>Description of the project. What technologies were used? What was the outcome?</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="section">
+        <h2>Contact Me</h2>
+        <form id="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" required></textarea>
+            <button type="submit" class="cta-button">Send Message</button>
+            <div id="form-message"></div>
+        </form>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
+CSS
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #3f51b5;
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    margin: 20px 0;
+}
+
+.cta-button {
+    background: #ff5722;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.section {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.skill {
+    background: #e3f2fd;
+    border: 1px solid #90caf9;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    flex: 1 1 30%; /* Responsive */
+    text-align: center;
+}
+
+.projects-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.project {
+    margin-bottom: 15px;
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input:focus, textarea:focus {
+    border-color: #3f51b5;
+}
+
+#form-message {
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #3f51b5;
+    color: white;
+}
+
+
+JAVA SCRIPT
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+
+        targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    });
+});
+
+// Contact form validation
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    const formMessage = document.getElementById('form-message');
+
+    // Simple validation
+    if (name && email && message) {
+        formMessage.textContent = 'Thank you for your message, ' + name + '!';
+        formMessage.style.color = 'green';
+        // Optionally, clear the form fields
+        document.getElementById('contact-form').reset();
+    } else {
+        formMessage.textContent = 'Please fill out all fields.';
+        formMessage.style.color = 'red';
+    }
+});
+
+SETTINGS JOINING
+{
+    "liveServer.settings.port": 5502
+}
